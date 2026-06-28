@@ -637,6 +637,129 @@ html[dir="ltr"] .card-arrow svg {
   transform: rotate(180deg);
 }
 
+.university-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-block-end: 24px;
+}
+
+.university-logo-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  cursor: pointer;
+  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+
+.university-logo-button:hover,
+.university-logo-button.active {
+  border-color: var(--orange-500);
+  background: #fff8f1;
+}
+
+.university-logo-button img {
+  width: 84px;
+  height: auto;
+  display: block;
+}
+
+.university-logo-button span {
+  font-weight: 700;
+}
+
+.university-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin-block-end: 28px;
+}
+
+.university-card {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  text-align: start;
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.university-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--orange-500);
+}
+
+.university-card.active {
+  border-color: var(--orange-500);
+  box-shadow: var(--shadow-soft);
+}
+
+.university-copy strong {
+  display: block;
+  margin-block-end: 8px;
+  font-size: 1rem;
+}
+
+.university-copy p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.university-details {
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.university-details-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 16px;
+  align-items: center;
+  margin-block-end: 20px;
+}
+
+.university-detail-logo {
+  width: 72px;
+  height: auto;
+  border-radius: 14px;
+  background: var(--surface-muted);
+  padding: 10px;
+}
+
+.rule-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.rule-list li {
+  position: relative;
+  margin: 0;
+  padding-inline-start: 30px;
+  color: var(--ink);
+}
+
+.rule-list li::before {
+  content: "\\2022";
+  position: absolute;
+  inset-inline-start: 0;
+  color: var(--orange-600);
+  font-size: 24px;
+  line-height: 1;
+}
+
 .journey-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
