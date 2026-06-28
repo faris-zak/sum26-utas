@@ -2,7 +2,7 @@
 window.STUDENT_GUIDE_DATA = {
   brand: {
     product: { ar: "دليل الطالب الذكي", en: "Smart Student Guide" },
-    organization: { ar: "الجامعة النموذجية", en: "Demo University" },
+    organization: { ar: "الجامعات العُمانية", en: "Omani universities" },
     event: { ar: "تحدي الصيف 2026", en: "Summer Challenge 2026" },
     demoLabel: { ar: "وضع العرض التجريبي للفعالية", en: "Event Demo Mode" },
     demoNotice: {
@@ -77,8 +77,43 @@ window.STUDENT_GUIDE_DATA = {
       ar: "يعكس الرمز عنوان الموقع الحالي تلقائياً.",
       en: "The code automatically reflects the current site address."
     },
+    universitiesTitle: { ar: "اختر جامعتك واعرف قواعدها", en: "Pick your university and see its rules" },
+    universitiesIntro: { ar: "مجموعة مختارة من الجامعات العُمانية. كل جامعة لها لائحة عرض خاصة بها.", en: "A curated set of Omani universities. Each has its own demo rules." },
+    universitiesPrompt: { ar: "اضغط الجامعة لتعيينها في التجربة.", en: "Tap a university to set it for the demo." },
     faqTitle: { ar: "أسئلة شائعة", en: "Frequently asked questions" }
   },
+  universities: [
+    {
+      id: "utas",
+      short: { ar: "UTAS", en: "UTAS" },
+      name: { ar: "جامعة التقنية والعلوم التطبيقية", en: "University of Technology and Applied Sciences" },
+      image: "assets/images/utas-logo.png",
+      description: {
+        ar: "لوائح عرضية لـ UTAS مع قواعد التسجيل، التدريب، والحذف والإضافة.",
+        en: "Demo rules for UTAS with registration, training, and add/drop guidance."
+      },
+      rules: [
+        { ar: "التسجيل الصيفي يُغلق في 10 يونيو.", en: "Summer registration closes 10 June." },
+        { ar: "الحد الأدنى للمقررات هو 12 ساعة معتمدة.", en: "Minimum load is 12 credits." },
+        { ar: "يحتاج التدريب الصيفي موافقة الكلية قبل البدء.", en: "Summer training requires college approval." }
+      ]
+    },
+    {
+      id: "squ",
+      short: { ar: "SQU", en: "SQU" },
+      name: { ar: "جامعة السلطان قابوس", en: "Sultan Qaboos University" },
+      image: "assets/images/squ-logo.png",
+      description: {
+        ar: "لوائح عرضية لـ SQU تشمل مواعيد التسجيل وطلبات الوثائق.",
+        en: "Demo rules for SQU covering registration windows and document requests."
+      },
+      rules: [
+        { ar: "التسجيل الرئيسي يبدأ في 1 يونيو وينتهي في 14 يونيو.", en: "Main registration opens 1 June and closes 14 June." },
+        { ar: "أرفق كشف علامات عند طلب إفادة طالب.", en: "Attach a transcript for student status letter requests." },
+        { ar: "الحذف والإضافة يتم عبر النظام الإلكتروني خلال الفترة المحددة.", en: "Add/drop is processed through the e-system during the allowed window." }
+      ]
+    }
+  ],
   demoPage: {
     eyebrow: { ar: "تجربة محلية حتمية", en: "Deterministic local experience" },
     title: { ar: "جرّب المساعد الأكاديمي", en: "Try the academic assistant" },
@@ -87,6 +122,7 @@ window.STUDENT_GUIDE_DATA = {
       en: "Every answer below is prebuilt from cited demo content, so it remains reliable on the presenter laptop and visitor phones."
     },
     choose: { ar: "اختر سيناريو", en: "Choose a scenario" },
+    universityLabel: { ar: "الجامعة المحددة", en: "Selected university" },
     assistantName: { ar: "مساعد دليل الطالب", en: "Student Guide Assistant" },
     assistantStatus: { ar: "جاهز - لا يتصل بمزوّد ذكاء اصطناعي", en: "Ready - no AI provider connection" },
     sources: { ar: "المصادر المستخدمة", en: "Sources used" },
