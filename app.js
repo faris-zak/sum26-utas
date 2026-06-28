@@ -6,12 +6,14 @@
   const page = document.body.dataset.page || "home";
   const storageKeys = {
     locale: "smart-guide-locale",
-    reminders: "smart-guide-reminders"
+    reminders: "smart-guide-reminders",
+    university: "smart-guide-university"
   };
 
   const state = {
     locale: localStorage.getItem(storageKeys.locale) === "en" ? "en" : "ar",
     currentScenarioId: new URLSearchParams(location.search).get("scenario") || data.scenarios[0].id,
+    currentUniversityId: localStorage.getItem(storageKeys.university) || (data.universities?.[0]?.id ?? ""),
     customQuery: "",
     fallback: false,
     deferredInstallPrompt: null,
@@ -193,6 +195,8 @@
           </div>
         </section>
 
+        ${renderUniversitySection()}
+
         <section class="section section-dark" aria-labelledby="journey-title">
           <div class="container">
             <div class="section-heading">
@@ -247,6 +251,72 @@
     `;
   }
 
+  function renderUniversitySection() {
+    const selectedUniversity = currentUniversity();
+    return `
+      <section class="section section-white" aria-labelledby="universities-title" id="universitySection">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">${l(data.brand.demoLabel)}</p>
+            <h2 id="universities-title">${l(data.home.universitiesTitle)}</h2>
+            <p class="lead">${l(data.home.universitiesIntro)}</p>
+          </div>
+          <div class="university-logos">
+            ${data.universities.map((uni) => `
+              <button class="university-logo-button${uni.id === selectedUniversity.id ? " active" : ""}" type="button" data-university="${escapeHtml(uni.id)}" aria-pressed="${uni.id === selectedUniversity.id}">
+                <img src="${escapeHtml(uni.image)}" width="120" height="80" alt="${escapeHtml(l(uni.short))}">
+                <span>${escapeHtml(l(uni.short))}</span>
+              </button>
+            `).join("")}
+          </div>
+          <div class="university-grid">
+            ${data.universities.map((uni) => `
+              <button class="university-card${uni.id === selectedUniversity.id ? " active" : ""}" type="button" data-university="${escapeHtml(uni.id)}" aria-pressed="${uni.id === selectedUniversity.id}">
+                <div class="university-copy">
+                  <strong>${l(uni.name)}</strong>
+                  <p>${l(uni.description)}</p>
+                </div>
+              </button>
+            `).join("")}
+          </div>
+          <div class="university-details">
+            <div class="university-details-header">
+              <img class="university-detail-logo" src="${escapeHtml(selectedUniversity.image)}" width="72" height="48" alt="${escapeHtml(l(selectedUniversity.short))}">
+              <div>
+                <span class="eyebrow">${l(data.demoPage.universityLabel)}</span>
+                <strong>${l(selectedUniversity.name)}</strong>
+              </div>
+            </div>
+            <ul class="rule-list">
+              ${selectedUniversity.rules.map((rule) => `<li>${l(rule)}</li>`).join("")}
+            </ul>
+            <p class="qr-hint">${l(data.home.universitiesPrompt)}</p>
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function bindUniversityEvents() {
+    document.querySelectorAll("[data-university]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const selected = button.dataset.university;
+        if (!selected || selected === state.currentUniversityId) return;
+        state.currentUniversityId = selected;
+        localStorage.setItem(storageKeys.university, selected);
+        updateUniversitySection();
+      });
+    });
+  }
+
+  function updateUniversitySection() {
+    const section = document.getElementById("universitySection");
+    if (!section) return;
+    section.outerHTML = renderUniversitySection();
+    bindUniversityEvents();
+    refreshIcons();
+  }
+
   function renderDemoPage() {
     return `
       <main id="main-content" tabindex="-1">
@@ -266,6 +336,10 @@
 
   function currentScenario() {
     return data.scenarios.find((scenario) => scenario.id === state.currentScenarioId) || data.scenarios[0];
+  }
+
+  function currentUniversity() {
+    return data.universities.find((uni) => uni.id === state.currentUniversityId) || data.universities[0];
   }
 
   function currentSources() {
@@ -520,6 +594,8 @@
         if (answer) answer.hidden = expanded;
       });
     });
+
+    bindUniversityEvents();
 
     const qrRoot = document.getElementById("eventQr");
     if (qrRoot && window.QRCode) {
